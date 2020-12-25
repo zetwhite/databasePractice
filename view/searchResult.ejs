@@ -1,0 +1,110 @@
+
+<html>
+    <head>
+      <title>[ database hw2 ] </title>
+      <link rel="stylesheet" type="text/css" href="/public/table.css">
+    </head>
+    <body>
+    <div class ="header"><%= title %></div>
+    <div class ="subheader">
+       <a href="/search"><< back to search page</a>
+    </div>
+
+    <hr>
+    
+    <div class = "center">
+        <%
+            if( CDATA === '' ){ %>
+                <table class=hideTable> 
+        <%    }
+            else { %> 
+                <table class=showTable>
+        <%  }
+        %>
+        <thread>
+            <th>이름</th>
+            <th>전화번호</th>
+            <th>주소</th>
+            <th>성별</th>
+        </thread>
+        <tbody>
+            <%
+            for( let i = 0; i < CDATA.length; i++ ) {
+                const row = CDATA[i];
+            %> 
+            <tr>
+                <td><%= row.name %></td>
+                <td><%= row.phone %></td>
+                <td><%= row.address %></td>
+                <td><%= row.gender %></td>
+            </tr>
+            <% } %>
+        </tbody>
+        </table>
+
+    
+
+        <%
+        if( PDATA === '' ){ %>
+            <table class=hideTable> 
+        <%    }
+            else { %> 
+                <table class=showTable>
+        <%  }
+        %>
+        <thread>
+            <th>제품명</th>
+            <th>제품번호</th>
+            <th>공급업체</th>
+        </thread>
+        <tbody>
+            <%
+            for( let i = 0; i < PDATA.length; i++ ) {
+                const row = PDATA[i];
+            %> 
+            <tr>
+                <td><%= row.name %></td>
+                <td><%= row.productid %></td>
+                <td><%= row.suppliername %></td>
+            </tr>
+            <% } %>
+        </tbody>
+        </table>
+
+
+
+        <%
+        if( TDATA === '' ){ %>
+            <table class=hideTable> 
+        <%    }
+            else { %> 
+                <table class=showTable>
+        <%  }
+        %>
+        <thread>
+            <th>거래번호</th>
+            <th>제품번호</th>
+            <th>가격</th>
+            <th>날짜</th>
+            <th>구매자</th>
+        </thread>
+        <tbody>
+            <%
+            for( let i = 0; i < TDATA.length; i++ ) {
+                const row = TDATA[i];
+            %> 
+            <tr>
+                <td><%= row.transitionid %></td>
+                <td><%= row.productid %></td>
+                <td><%= row.price %></td>
+                <td><%= row.date %></td>
+                <td><%= row.customername%></td>
+            </tr>
+            <% } %>
+        </tbody>
+        </table>
+
+
+    </div>
+
+</body>

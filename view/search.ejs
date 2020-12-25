@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>[ database hw2 ] </title>
+    <link rel="stylesheet" type="text/css" href="/public/index.css">
+    <script type="text/javascript" src="/public/validateUtil.js"></script>
+  </head>
+  <body>
+    <div class ="header">[ database hw2 ] </div>
+    <div class ="subheader">
+        this is page for search<br>
+        <a href="/"><< back to main page</a>
+    </div>
+
+    <hr> 
+    <div class = "center">
+      <form onsubmit="return checkCustomerForm();" class = "intable" action="/search/customer" method="post" novalidate>
+        <p> >> search customer</p> 
+        <div>
+          <label>name:</label>
+          <input id="c1" type="text" name="name" placeholder="Barbabas Dimblebee" > 
+        </div>
+        <div>
+          <label>phone:</label>
+          <input id="c2" type="text" name="phone" placeholder="123-123-1234" >
+        </div>
+        <div>
+          <label>address</label>
+          <input id="c3" type="text" name="address" placeholder="3 Colorado Street" >
+        </div>
+        <div>
+          <label>gender</label>
+          <select name="gender" id="c4" >
+            <option value="">unknown</option>
+            <option value="f">female</option>
+            <option value="m">male</option>
+          </select>
+        </div>
+        <div>
+          <button type="submit"> 검색</button>
+        </div>
+      </form> 
+
+      <br>
+      <form onsubmit="return checkProductForm();" class = "intable" action="/search/product" method="post" novalidate>
+        <p> >> search product</p> 
+        <div>
+          <label>name:</label>
+          <input id="p1" type="text" name="name" placeholder="Tomato" > 
+        </div>
+        <div>
+          <label>productID:</label>
+          <input id="p2" type="number" name="productID" placeholder="12341234" >
+        </div>
+        <div>
+          <label>supplier:</label>
+          <input id="p3" type="text" name="supplier" placeholder="Walter-Von-Rueden" >
+        </div>
+        <div>
+          <button type="submit"> 검색</button>
+        </div>
+      </form> 
+
+      <br>
+      <form onsubmit="return checkTransForm();" class = "intable" action="/search/transition" method="post" novalidate>
+        <p> >> search transaction</p> 
+        <div>
+          <label>trans Number:</label>
+          <input id="t1" type="text" name="transNumber" placeholder="477802-3682" > 
+        </div>
+        <div>
+          <label>productID:</label>
+          <input id="t2" type="number" name="productID" placeholder="12341234" >
+        </div>
+        <div>
+          <label>price:</label>
+          <input id="t3" type="number" step="0.01" name="price" placeholder="18.20" >
+        </div>
+        <div>
+          <label>date:</label>
+          <input id="t4" type="date" name="date" >
+        </div>
+        <div>
+          <label>cust Name:</label>
+          <input id="t5" type="text" name="custName" >
+        </div>
+        <div>
+          <button type="submit"> 검색</button>
+        </div>
+      </form> 
+    
+    </div>
+  </body>
+</html>

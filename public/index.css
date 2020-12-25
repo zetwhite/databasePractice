@@ -33,7 +33,7 @@
 }
 
 .hdr2{
-    font-size : 1.rem;
+    font-size : 1rem;
     text-align: center;
 }
 
@@ -85,4 +85,15 @@
 .intable>div>button{
     position:absolute; 
     right : 20px; 
+}
+
+.delete {
+    background-color: var(--pale-red); /* Green */
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
 }

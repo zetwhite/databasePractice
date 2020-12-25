@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var insertRouter = require('./routes/insert'); 
 var uploadRouter = require('./routes/upload'); 
 var searchRouter = require('./routes/search'); 
+var moreRouter = require('./routes/more'); 
 
 
 //basic setting 
@@ -33,6 +34,7 @@ app.use('/', indexRouter);
 app.use('/insert', insertRouter); 
 app.use('/upload', uploadRouter); 
 app.use('/search', searchRouter); 
+app.use('/more', moreRouter)
 
 //error handling 
 app.get('/start', function(req, res){ 

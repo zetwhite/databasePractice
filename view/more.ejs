@@ -1,0 +1,128 @@
+
+<html>
+    <head>
+      <title>[ database hw2 ] </title>
+      <link rel="stylesheet" type="text/css" href="/public/table.css">
+    </head>
+    <body>
+    <div class ="header"><%= title %></div>
+    <div class ="subheader">
+       <a href="/"><< back to main page</a>
+    </div>
+
+    <hr>
+
+    <div class = "center">
+        <p class="hdr2">01. 남자보다 여자가 많이 산 상품은 ? </p>
+        <form action = "/more/01" method = "post">
+            <button type="submit">검색</button>
+        </form>
+    
+        <%
+            if( GENDATA === '' ){ %>
+                <table class=hideTable> 
+        <%    }
+            else { %> 
+                <table class=showTable>
+        <%  }
+        %>
+        <thread>
+            <th>제품명</th>
+            <th>제품번호</th>
+            <th>여성 구매 횟수</th>
+            <th>남성 구매 횟수</th>
+        </thread>
+        <tbody>
+            <%
+            for( let i = 0; i < GENDATA.length; i++ ) {
+                const row = GENDATA[i];
+            %> 
+            <tr>
+                <td><%= row.name %></td>
+                <td><%= row.id%></td>
+                <td><%= row.f %></td>
+                <td><%= row.m %></td>
+            </tr>
+            <% } %>
+        </tbody>
+        </table>
+
+        <br>
+        <p class="hdr2">02. 주어진 날 이전에 가장 많은(금액기준) 거래가 이루어진 상품 k개 ? </p>
+        <form action = "/more/02" method = "post">
+            <label>주어진 날 :</label>
+            <input type="date" name="date"  required>
+            <br/> 
+            <label>출력할 상품 갯수 (k) : </label>
+            <input type="number" name="num" required> 
+            <br/> 
+            <button type="submit">검색</button>
+        </form>
+
+        <%
+        if( MOSDATA === '' ){ %>
+            <table class=hideTable> 
+        <%    }
+            else { %> 
+                <table class=showTable>
+        <%  }
+        %>
+        <thread>
+            <th>제품명</th>
+            <th>제품번호</th>
+            <th>판매액</th>
+        </thread>
+        <tbody>
+            <%
+            for( let i = 0; i < MOSDATA.length; i++ ) {
+                const row = MOSDATA[i];
+            %> 
+            <tr>
+                <td><%= row.name %></td>
+                <td><%= row.pid %></td>
+                <td><%= row.cnt.toFixed(2) %></td>
+            </tr>
+            <% } %>
+        </tbody>
+        </table>
+
+        <br> 
+        <p class="hdr2">03. 하나의 supplier에서 m 번 이상의 제품을 산 고객의 이름 ? </p>
+        <form action = "/more/03" method = "post">
+            <label>몇 번 이상?(m) : </label>
+            <input type="number" name="num" required> 
+            <br/> 
+            <button type="submit">검색</button>
+        </form>
+
+
+        <%
+        if( FEQDATA === '' ){ %>
+            <table class=hideTable> 
+        <%    }
+            else { %> 
+                <table class=showTable>
+        <%  }
+        %>
+        <thread>
+            <th>고객 이름</th>
+        </thread>
+        <tbody>
+            <%
+            for( let i = 0; i < FEQDATA.length; i++ ) {
+                const row = FEQDATA[i];
+            %> 
+            <tr>
+                <td><%= row.name %></td>
+            </tr>
+            <% } %>
+        </tbody>
+        </table>
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+    </div>
+
+</body>

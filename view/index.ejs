@@ -13,6 +13,7 @@
     </div>
     <hr> 
     
+    <div class="center">
     <div class = hdr1>
       <a href="/insert">
         >> go to insert page
@@ -25,6 +26,21 @@
       </a>
     </div>
 
+    <div class = hdr1>
+      <a href="/more">
+        >> go to more specific search
+      </a>
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+    <form action = "/delete" method = "post">
+        <button class="delete" type="submit">delete all data</button>
+    </form>
+    <p class="result">
+    <%= delResult %> 
+    </p>
     
     </div>
   </body>

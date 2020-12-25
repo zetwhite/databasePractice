@@ -25,11 +25,16 @@
     opacity : 0.7; 
 }
 
-.content-header {
+.hdr1 {
     font-size : 1.5rem; 
     padding-top : 1rem;
     padding-bottom: 1rem;
     text-align : center; 
+}
+
+.hdr2{
+    font-size : 1.rem;
+    text-align: center;
 }
 
 .content {
@@ -39,4 +44,45 @@
 
 .result {
     color : red; 
+}
+
+.center {
+    margin: auto;
+    padding: 10px;
+    display : flex; 
+    flex-direction: column;
+    justify-content: center;  
+    align-items: center;
+}
+
+.intable {
+    position: relative;
+    border-style: solid;
+    border-color: gray;
+    border-width : 1px;
+    padding: 10px;
+    width: 400px;
+    height: auto;
+}
+.intable>div{
+    position: relative;
+    padding : 5px; 
+    width: auto;
+    height : 20px; 
+}
+.intable>div>input{
+    position: absolute;
+    left : 100px; 
+}
+.intable>div>select{
+    position: absolute;
+    left : 100px; 
+}
+.intable>div>span{
+    position: absolute;
+    left:290px; 
+}
+.intable>div>button{
+    position:absolute; 
+    right : 20px; 
 }

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/public/index.css">
+  </head>
+  <body>
+    <div class ="header"><%= title %></div>
+    <div class ="subheader">
+       this is page for insertion <br/>
+    </div>
+    <hr> 
+    <div class = "hdr1"> [ insert data using .csv file ] </div>
+    <div class = "content">
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="datafile">datafile(.csv):</label>
+        <input type="file" name="datafile">
+        <input type="submit" value="Submit">
+      </form> 
+      <p class = "result">
+        <%= uploadResult %>
+      </p>
+      <br>
+    </div>
+  
+    <hr> 
+    <div class = "hdr1">  [ insert one record ] </div>
+    <div class = "center">
+      <form class = "intable" action="/insert/customer" method="post">
+        <p> >> add new customer</p> 
+        <div>
+          <label>name:</label>
+          <input type="text" name="name" placeholder="Barbabas Dimblebee" required> 
+        </div>
+        <div>
+          <label>phone:</label>
+          <input type="text" name="phone" placeholder="123-123-1234" required>
+        </div>
+        <div>
+          <label>address</label>
+          <input type="text" name="address" placeholder="3 Colorado Street" required>
+        </div>
+        <div>
+          <label>gender</label>
+          <select name="gender" required>
+            <option value="f">female</option>
+            <option value="m">male</option>
+          </select>
+        </div>
+        <div>
+          <button type="submit"> 추가</button>
+        </div>
+      </form> 
+      <p class = "result">
+        <%= cresult %>
+      </p>
+
+      <form class = "intable" action="/insert/product" method="post">
+        <p> >> add new product</p> 
+        <div>
+          <label>name:</label>
+          <input type="text" name="name" placeholder="Tomato" required> 
+        </div>
+        <div>
+          <label>productID:</label>
+          <input type="number" name="productID" placeholder="12341234" required>
+        </div>
+        <div>
+          <label>supplier:</label>
+          <input type="text" name="supplier" placeholder="Walter-Von-Rueden" required>
+        </div>
+        <div>
+          <button type="submit"> 추가</button>
+        </div>
+      </form> 
+      <p class = "result">
+        <%= pResult %>
+      </p>
+
+
+      <form class = "intable" action="/insert/transition" method="post">
+        <p> >> add new transaction</p> 
+        <div>
+          <label>trans Number:</label>
+          <input type="text" name="transNumber" placeholder="477802-3682" required> 
+        </div>
+        <div>
+          <label>productID:</label>
+          <input type="number" name="productID" placeholder="12341234" required>
+        </div>
+        <div>
+          <label>price:</label>
+          <input type="number" step="0.01" name="price" placeholder="18.20" required>
+        </div>
+        <div>
+          <label>date:</label>
+          <input type="date" name="date" >
+        </div>
+        <div>
+          <label>cust Name:</label>
+          <input type="text" name="custName" required >
+        </div>
+        <div>
+          <button type="submit"> 추가</button>
+        </div>
+      </form> 
+      <p class = "result">
+        <%= tResult %>
+      </p>
+    
+    </div>
+  </body>
+</html>

@@ -9,6 +9,7 @@ var createError = require('http-errors');
 var indexRouter = require('./routes/index'); 
 var insertRouter = require('./routes/insert'); 
 var uploadRouter = require('./routes/upload'); 
+var searchRouter = require('./routes/search'); 
 
 
 //basic setting 
@@ -30,7 +31,8 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 //router and server running info 
 app.use('/', indexRouter); 
 app.use('/insert', insertRouter); 
-app.use('/upload', uploadRouter)
+app.use('/upload', uploadRouter); 
+app.use('/search', searchRouter); 
 
 //error handling 
 app.get('/start', function(req, res){ 

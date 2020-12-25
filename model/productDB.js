@@ -1,21 +1,27 @@
+const getConnection = require('./connect');
 const pool = require('./connect');
 
 
-async function insert(name, pid, supplier, callback){
+async function insert(name, pid, supplier){
     var data = {name : name, productid : pid, suppliername : supplier }; 
-    var result = pool.query
-    getConnection((conn) =>{
-        var exec = conn.query('insert into Product set ?', data, function(error, result){
-            console.log('sql log : ' + exec.sql); 
-            if(error){
-                callback(error, null); 
-            }
-            else {
-                callback(null, result); 
-            }
+    
+    return new Promise(function(resolve, reject){
+        getConnection()
+        .then(function(conn){
+            var exec = conn.query('insert into Product set ?', data, function(error, result){
+                if(error){
+                    console.log('sql log : ' + exec.sql); 
+                    reject(error); 
+                }
+                else{
+                    resolve(result); 
+                }
+            })
+            conn.release(); 
         })
-        conn.release(); 
-        return ; 
+        .catch(function(err){
+            console.log("database connection error"); 
+        }); 
     }); 
 }
 

@@ -1,5 +1,4 @@
 var express = require('express');
-var bodyParser = require('body-parser'); 
 var customerDB = require('../model/customerDB'); 
 var productDB = require('../model/productDB'); 
 var transDB = require('../model/transDB'); 
@@ -48,41 +47,38 @@ router.post('/customer', function(req, res, next){
   const address = req.body.address; 
   const gender = req.body.gender; 
 
-  customerDB.insertCustomer(name, phone, address, gender, function(error, result){
-    if(error || !result){
-      console.log("fail to insert new user"); 
-      console.log(error); 
-      sendInsertPage(res, {cResult:'fail to insert customer :('}); 
-    }
-    else{
-      console.log('success to insert into customer'); 
-      sendInsertPage(res, {cResult:'success to insert customer :)'}); 
-    }
+  customerDB.insertCustomer(name, phone, address, gender)
+  .then(function(result){
+    sendInsertPage(res, {cResult:'success to insert customer :)'}); 
   })
-})
-
-router.post('/product', function(req, res){
-  productDB.insertProduct(req.body.name, req.body.productID, req.body.supplier, function(error, result){
-    if(error||!result){
-      console.log(error); 
-      sendInsertPage(res, {pReuslt : 'fail to insert product :('}); 
-    }
-    else{
-      sendInsertPage(res, {pReuslt: 'success to insert product :)'})
-    }
+  .catch(function(error){
+    console.log(error); 
+    sendInsertPage(res, {cResult:'fail to insert customer :('}); 
   }); 
 })
 
+
+router.post('/product', async function(req, res){
+  productDB.insertProduct(req.body.name, req.body.productID, req.body.supplier)
+  .then(function(result){
+    sendInsertPage(res, {pReuslt: 'success to insert product :)'})
+  })
+  .catch(function(error){
+    console.log(error); 
+    sendInsertPage(res, {pReuslt : 'fail to insert product :('});  
+  }); 
+})
+
+
 router.post('/transition', function(req, res){
   b = req.body; 
-  transDB.inserTransition(b.transNumber, b.productID, b.price, b.date, b.custName, function(error, result){
-    if(error || !result){
-      console.log(error); 
-      sendInsertPage(res, {tResult : 'fail to insert transition :('}); 
-    }
-    else{
-      sendInsertPage(res, {tResult : 'success to insert transition :)'}); 
-    }
+  transDB.inserTransition(b.transNumber, b.productID, b.price, b.date, b.custName)
+  .then(function(result){
+    sendInsertPage(res, {tResult : 'success to insert transition :)'}); 
+  })
+  .catch(function(error){
+    console.log(error); 
+    sendInsertPage(res, {tResult : 'fail to insert transition :('});  
   }); 
 })
 

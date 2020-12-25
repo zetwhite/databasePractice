@@ -52,43 +52,35 @@ var upload = multer({
 }); 
 
 
-function uploadArr(arr){
-  let c = 0; 
-  let p = 0; 
-  let t = 0; 
-
-  for(let i = 0; i < arr.length; i++){
-    if(arr[i][0] == 'C'){
+async function update(info){
+  return new Promise(function(resolve){
+    if(info[0] == 'C'){
       let gender = 'f'; 
-      if(arr[i][0].match(/[M]/g))
+      if(info[4].match(/[M]/g))
         gender = 'm'; 
-        customerDB.insertCustomer(arr[i][1], arr[i][2], arr[i][3], gender, function(error, result){
-        if(error)
-          console.log(error); 
-        else
-          c++; 
-      }); 
-    }
-    else if(arr[i][0] == 'P'){
-        productDB.insertProduct(arr[i][1], arr[i][2], arr[i][3], function(error, result){
-        if(error)
-          console.log(error); 
-        else 
-          p++; 
+      customerDB.insertCustomer(info[1], info[2], info[3], gender)
+      .then(function(result){
+        resolve('C');  
       })
+      .catch((err)=>resolve('z')); 
     }
-    else if(arr[i][0] == 'T'){
-        transDB.inserTransition(arr[i][1], arr[i][2], arr[i][3], arr[i][4], arr[i][5], function(error, result){
-        if(error)
-          console.log(error); 
-        else 
-          t++; 
+    else if(info[0] == 'P'){
+      productDB.insertProduct(info[1], info[2], info[3])
+      .then(function(result){
+        resolve('P'); 
       })
+      .catch((err)=>resolve('z')); 
     }
-  }
-  return {
-    c, p, t
-  }; 
+    else if(info[0] == 'T'){
+      info[3] = info[3].substring(1); 
+      info[4] = info[4].split('/').reverse().join("-"); 
+      transDB.inserTransition(info[1], info[2], parseFloat(info[3]), info[4], info[5])
+      .then(function(result){
+        resolve('T')
+      })
+      .catch((err)=>resolve('z')); 
+    }
+  }); 
 }
 
 
@@ -99,14 +91,27 @@ router.post('/', upload.single('datafile'), async function(req, res){
     let dataFile = req.file; 
     console.log(dataFile); 
 
-    let arr = fs.readFileSync(dataFile.path).toString().split('\n').map(e=>e.split(',')); 
+    let arr = fs.readFileSync(dataFile.path).toString().split('\n')
+    .map(e=>e.trim()).map(e=>e.split(',').map(e=>e.trim())); 
     console.log(arr); 
-    let {c, p, t} = await uploadArr(arr); 
+    let c = 0 ; 
+    let p = 0; 
+    let t = 0; 
+    for(let i = 0; i < arr.length; i++){
+      console.log(arr[i]); 
+      temp = await update(arr[i])
+      .then(function(ret){
+        console.log(ret); 
+        if(ret ==='C') c++; 
+        if(ret ==='T') t++; 
+        if(ret ==='P') p++; 
+      })
+    } 
     console.log(c, p, t); 
     sendInsertPage(res, {
-      uploadResult : 'success to insert ' + c + ' customers and' + p + 'products and ' + t + ' transitions'
+      uploadResult : 'success to insert ' + c + ' customers and ' + p + ' products and ' + t + ' transactions'
     })
-});
+})
 
 
 /* GET home page. */

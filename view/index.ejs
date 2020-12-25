@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/public/index.css">
+  </head>
+  <body>
+    <div class ="header"><%= title %></div>
+    <div class ="subheader">
+        Welcome to <%= title %> <br/>
+        you can 'insert', 'delete', 'search' data of (customer, transaction, product)<br/>
+        try it! <br/>
+    </div>
+    <hr> 
+    <div class = "content-header">
+      [ insert data using .csv file ] 
+    </div>
+    <div class = "content">
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="datafile">datafile(.csv):</label>
+        <input type="file" name="datafile">
+        <input type="submit" value="Submit">
+      </form> 
+      <p class = "result">
+        <%= uploadResult %>
+      </p>
+    </div>
+
+      <a href="/insert">insert one record</a>
+      <a href="/search">search data </a>
+  </body>
+</html>
